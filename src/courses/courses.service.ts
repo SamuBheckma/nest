@@ -1,5 +1,5 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
-import { Course } from './courses.entiy';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common'
+import { Course } from './entities/courses.entiy'
 
 @Injectable()
 export class CoursesService {
@@ -13,19 +13,20 @@ export class CoursesService {
     ];
 
     findAll() {
-        return this.courses;
+        return this.courses
     }
 
     findOne(id: number) {
-        const course = this.courses.find((course) => course.id === id);
+        const course = this.courses.find((course) => course.id === id)
         if (!course) {
-            throw new NotFoundException(`Course with id ${id} not found`);
+            throw new NotFoundException(`Course with id ${id} not found`)
         }
         return course;
     }
 
     create(createCourseDto: any) {
-        this.courses.push(createCourseDto);
+        this.courses.push(createCourseDto)
+        return createCourseDto
     }
 
     update(id: number, updateCourseDto: any) {
@@ -41,9 +42,9 @@ export class CoursesService {
 
 
     remove(id: number) {
-        const index = this.courses.findIndex(course => course.id === id);
+        const index = this.courses.findIndex(course => course.id === id)
         if (index >= 0) {
-            this.courses.splice(index, 1);
+            this.courses.splice(index, 1)
         }
     }
 }
