@@ -1,6 +1,8 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSourceOptions } from 'typeorm';
+import { Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { Course } from 'src/courses/entities/courses.entity'
+import { Tag } from 'src/courses/entities/tags.entity'
+import { DataSourceOptions } from 'typeorm'
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
@@ -9,19 +11,19 @@ export const dataSourceOptions: DataSourceOptions = {
   username: 'postgres',
   password: 'docker',
   database: 'nest',
-  entities: [],
+  entities: [Course, Tag],
   synchronize: true,
 }
 
 @Module({
-    imports: [
-        TypeOrmModule.forRootAsync({
-            useFactory: async () => {
-                return { 
-                    ... dataSourceOptions,
-       }
-     }
-   }),
-  ]
+  imports: [
+    TypeOrmModule.forRootAsync({
+      useFactory: async () => {
+        return {
+          ...dataSourceOptions,
+        }
+      },
+    }),
+  ],
 })
 export class DatabaseModule {}
